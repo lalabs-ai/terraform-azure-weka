@@ -30,12 +30,13 @@ locals {
   sg_id                 = var.sg_id == "" ? module.network[0].sg_id : var.sg_id
   private_dns_zone_name = var.private_dns_zone_name == "" ? module.network[0].private_dns_zone_name : var.private_dns_zone_name
   private_dns_rg_name   = var.private_dns_rg_name == "" ? module.network[0].private_dns_rg_name : var.private_dns_rg_name
+  prefix                = random_id.id.hex
 }
 
 module "peering" {
   count           = length(var.vnet_to_peering)
   source          = "./modules/peering_vnets"
-  prefix          = "${random_id.id.hex}"
+  prefix          = local.prefix
   vnet_rg_name    = local.vnet_rg_name
   vnet_name       = local.vnet_name
   vnet_to_peering = var.vnet_to_peering
