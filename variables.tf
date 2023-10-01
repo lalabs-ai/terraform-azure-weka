@@ -1,3 +1,8 @@
+# generate random id
+resource "random_id" "id" {
+  byte_length = 4
+}
+
 variable "prefix" {
   type = string
   description = "Prefix for all resources"
@@ -5,7 +10,8 @@ variable "prefix" {
     condition     = can(regex("^[a-zA-Z][a-zA-Z\\-\\_0-9]{1,64}$", var.prefix))
     error_message = "Prefix name must start with letter, only contain letters, numbers, dashes, or underscores."
   }
-  default = "weka"
+  # set default to random_id for unique naming
+  default = "${random_id.id.hex}"
 }
 
 variable "rg_name" {
