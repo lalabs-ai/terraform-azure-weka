@@ -7,7 +7,8 @@ locals {
   disk_size                 = var.default_disk_size + var.traces_per_ionode * (var.container_number_map[var.instance_type].compute + var.container_number_map[var.instance_type].drive + var.container_number_map[var.instance_type].frontend)
   private_nic_first_index   = var.assign_public_ip ? 1 : 0
   alphanumeric_cluster_name = lower(replace(var.cluster_name, "/\\W|_|\\s/", ""))
-  alphanumeric_prefix_name  = lower(replace(var.prefix, "/\\W|_|\\s/", ""))
+  alphanumeric_prefix_name  = "${random_id.id.hex}"
+  # lower(replace(var.prefix, "/\\W|_|\\s/", ""))
   subnet_range              = data.azurerm_subnet.subnet.address_prefix
   nics_numbers              = var.install_cluster_dpdk ? var.container_number_map[var.instance_type].nics : 1
   custom_data_script        = templatefile("${path.module}/user-data.sh", {
