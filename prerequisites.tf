@@ -5,7 +5,8 @@ data "azurerm_resource_group" "rg" {
 module "network" {
   count                 = var.subnet_name == "" ? 1 : 0
   source                = "./modules/network"
-  prefix                = var.prefix
+  prefix                = "${random_id.id.hex}"
+  # var.prefix
   rg_name               = var.rg_name
   vnet_rg_name          = var.vnet_rg_name
   private_dns_rg_name   = var.private_dns_rg_name
