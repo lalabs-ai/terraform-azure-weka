@@ -293,8 +293,10 @@ variable "function_app_log_level" {
 variable "function_app_storage_account_prefix" {
   type = string
   description = "Weka storage account name prefix"
-  default = local.prefix
+  default = "weka"
 }
+
+var.function_app_storage_account_prefix = local.prefix
 
 variable "function_app_storage_account_container_prefix" {
   type = string
