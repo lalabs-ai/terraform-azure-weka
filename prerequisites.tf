@@ -2,6 +2,11 @@ data "azurerm_resource_group" "rg" {
   name = var.rg_name
 }
 
+# generate random id
+resource "random_id" "id" {
+  byte_length = 4
+}
+
 module "network" {
   count                 = var.subnet_name == "" ? 1 : 0
   source                = "./modules/network"
