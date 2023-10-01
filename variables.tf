@@ -296,8 +296,6 @@ variable "function_app_storage_account_prefix" {
   default = "weka"
 }
 
-var.function_app_storage_account_prefix = local.prefix
-
 variable "function_app_storage_account_container_prefix" {
   type = string
   description = "Weka storage account container name prefix"

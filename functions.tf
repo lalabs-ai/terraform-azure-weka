@@ -3,7 +3,7 @@ locals {
   stripe_width                     = local.stripe_width_calculated < 16 ? local.stripe_width_calculated : 16
   location                         = data.azurerm_resource_group.rg.location
   function_app_zip_name            = "${var.function_app_dist}/${var.function_app_version}.zip"
-  weka_sa                          = "${var.function_app_storage_account_prefix}${local.location}"
+  weka_sa                          = "${local.prefix}${local.location}"
   weka_sa_container                = "${var.function_app_storage_account_container_prefix}${local.location}"
   function_code_path               = "${path.module}/function-app/code"
   function_app_code_hash           = md5(join("", [for f in fileset(local.function_code_path, "**") : filemd5("${local.function_code_path}/${f}")]))
