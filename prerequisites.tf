@@ -35,7 +35,7 @@ locals {
 module "peering" {
   count           = length(var.vnet_to_peering)
   source          = "./modules/peering_vnets"
-  prefix          = var.prefix
+  prefix          = "${random_id.id.hex}"
   vnet_rg_name    = local.vnet_rg_name
   vnet_name       = local.vnet_name
   vnet_to_peering = var.vnet_to_peering
