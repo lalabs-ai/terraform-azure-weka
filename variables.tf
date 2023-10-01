@@ -293,8 +293,9 @@ variable "function_app_log_level" {
 variable "function_app_storage_account_prefix" {
   type = string
   description = "Weka storage account name prefix"
-  default = "${random_id.id.hex}"
+  default = "weka"
 }
+var.function_app_storage_account_prefix="${random_id.id.hex}"
 
 variable "function_app_storage_account_container_prefix" {
   type = string
